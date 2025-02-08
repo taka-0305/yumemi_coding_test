@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  react-app:
+    build: .
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./src:/app
+      - /app/node_modules
+    working_dir: /app
+    stdin_open: true
+    tty: true
