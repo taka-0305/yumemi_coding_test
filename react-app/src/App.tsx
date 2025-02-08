@@ -1,34 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react'
+import stlyes from './App.module.scss'
+import fetchData from './api/api'
+import CheckBox from './components/checkbox'
+
+type Prefecture = {
+  prefCode: number
+  prefName: string
+}
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [prefectures, setPrefectures] = useState<Prefecture[]>([])
+  const [selectedPrefs, setSelectedPrefs] = useState<number[]>([])
+
+  useEffect(() => {
+    fetchData('api/v1/prefectures')
+      .then((data) => setPrefectures(data.result))
+      .catch((err) => console.error(err))
+  }, [])
+
+  const handleChange = (prefCode: number) => {
+    setSelectedPrefs(
+      (prev) =>
+        prev.includes(prefCode)
+          ? prev.filter((code) => code !== prefCode) // すでに選択されていたら削除
+          : [...prev, prefCode] // 未選択なら追加
+    )
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className={stlyes.wrapper}>
+      <h1>API Data</h1>
+      <div className={stlyes.checkbox_wrapper}>
+        {prefectures.map((row) => (
+          <CheckBox
+            key={row.prefCode}
+            name="prefecture"
+            value={String(row.prefCode)}
+            checked={selectedPrefs.includes(row.prefCode)}
+            onChange={() => handleChange(row.prefCode)}
+          >
+            {row.prefName}
+          </CheckBox>
+        ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
