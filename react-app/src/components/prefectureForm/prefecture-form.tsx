@@ -8,12 +8,12 @@ type Prefecture = {
 }
 
 type PrefectureFormProps = {
-  onSubmit: (selectedPrefs: number[]) => void
+  onSubmit: (selectedPrefs: Prefecture[]) => void
 }
 
 const PrefectureForm: React.FC<PrefectureFormProps> = ({ onSubmit }) => {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([])
-  const [selectedPrefs, setSelectedPrefs] = useState<number[]>([])
+  const [selectedPrefs, setSelectedPrefs] = useState<Prefecture[]>([])
 
   useEffect(() => {
     fetchData('api/v1/prefectures')
@@ -21,11 +21,11 @@ const PrefectureForm: React.FC<PrefectureFormProps> = ({ onSubmit }) => {
       .catch((err) => console.error(err))
   }, [])
 
-  const handleChange = (prefCode: number) => {
+  const handleChange = (prefCode: number, prefName: string) => {
     setSelectedPrefs((prev) =>
-      prev.includes(prefCode)
-        ? prev.filter((code) => code !== prefCode)
-        : [...prev, prefCode]
+      prev.some((pref) => pref.prefCode === prefCode)
+        ? prev.filter((pref) => pref.prefCode !== prefCode)
+        : [...prev, { prefCode, prefName }]
     )
   }
 
@@ -42,8 +42,8 @@ const PrefectureForm: React.FC<PrefectureFormProps> = ({ onSubmit }) => {
           key={row.prefCode}
           name="prefecture"
           value={String(row.prefCode)}
-          checked={selectedPrefs.includes(row.prefCode)}
-          onChange={() => handleChange(row.prefCode)}
+          checked={selectedPrefs.some((p) => p.prefCode === row.prefCode)}
+          onChange={() => handleChange(row.prefCode, row.prefName)}
         >
           {row.prefName}
         </CheckBox>

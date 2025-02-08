@@ -11,7 +11,7 @@ type Prefecture = {
 }
 
 function App() {
-  const [selectedPrefs, setSelectedPrefs] = useState<number[]>([])
+  const [selectedPrefs, setSelectedPrefs] = useState<Prefecture[]>([])
 
   return (
     <div className={stlyes.wrapper}>
