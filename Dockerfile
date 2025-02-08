@@ -2,10 +2,10 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY src/package.json src/package-lock.json ./
+COPY react-app/package.json react-app/package-lock.json ./
 
 RUN npm install
 
-COPY src .
+COPY react-app .
 
 CMD ["npm", "run", "dev", "--", "--host"]
