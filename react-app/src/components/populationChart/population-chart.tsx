@@ -8,32 +8,37 @@ type PopulationData = {
   value: number
 }
 
+type Prefecture = {
+  prefCode: number
+  prefName: string
+}
+
 type PopulationChartProps = {
-  selectedPrefs: number[]
+  selectedPrefs: Prefecture[]
 }
 
 const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefs }) => {
   const [seriesData, setSeriesData] = useState<any[]>([])
 
   useEffect(() => {
-    const fetchPopulationData = async (prefCode: number) => {
+    const fetchPopulationData = async (pref: Prefecture) => {
       const data = await fetchData(
-        `api/v1/population/composition/perYear?prefCode=${prefCode}`
+        `api/v1/population/composition/perYear?prefCode=${pref.prefCode}`
       )
       const populationData =
         data.result.data.find((d: any) => d.label === '総人口')?.data || []
 
       return {
-        name: `都道府県 ${prefCode}`,
+        name: `都道府県 ${pref.prefName}`,
         data: populationData.map((d: PopulationData) => [d.year, d.value]),
       }
     }
 
     const loadPopulationData = async () => {
       const responses = await Promise.all(
-        selectedPrefs.map((prefCode) => fetchPopulationData(prefCode))
+        selectedPrefs.map((pref) => fetchPopulationData(pref))
       )
-      setSeriesData(responses.filter((data) => data !== null)) // null のデータは除外
+      setSeriesData(responses.filter((data) => data !== null))
     }
 
     loadPopulationData()
