@@ -11,6 +11,12 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --base-font-size: 1.4em;
+  --base-line-height: 2;
+}
+
+html{
+  font-size: 62.5%;
 }
 
 a {

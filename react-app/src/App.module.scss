@@ -1,0 +1,17 @@
+.wrapper{
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.checkbox_wrapper{
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  font-size: var(--base-font-size);
+  line-height: var(--base-line-height);
+  label{
+    min-width: 200px;
+    input{
+      margin-right: 1em;
+    }
+  }
+}
