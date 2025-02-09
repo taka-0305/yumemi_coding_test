@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import CheckBox from '../ui/checkbox/checkbox'
+import Button from '../ui/button/button'
 import fetchData from '../../api/api'
 import styles from './prefecture-form.module.scss'
 
@@ -36,9 +37,10 @@ const PrefectureForm: React.FC<PrefectureFormProps> = ({ onSubmit }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.title}>
-        <h2>都道府県リスト</h2>
+        <h2>都道府県を選択する</h2>
+        <p>グラフに表示する都道府県を選択してください。</p>
       </div>
       <div className={styles.checkbox_wrapper}>
         {prefectures.map((row) => (
@@ -54,7 +56,9 @@ const PrefectureForm: React.FC<PrefectureFormProps> = ({ onSubmit }) => {
         ))}
         <br />
       </div>
-      <button type="submit">送信</button>
+      <div className={styles.button_wrapper}>
+        <Button>グラフを表示する</Button>
+      </div>
     </form>
   )
 }

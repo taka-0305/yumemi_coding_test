@@ -1,8 +1,22 @@
-
+.form{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  .title{
+    p{
+      color: gray;
+    }
+  }
+}
 
 .checkbox_wrapper{
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   font-size: var(--base-font-size);
   line-height: var(--base-line-height);
+}
+
+.button_wrapper{
+  display: flex;
+  justify-content: center;
 }
