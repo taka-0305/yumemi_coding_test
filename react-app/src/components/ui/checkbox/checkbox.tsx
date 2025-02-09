@@ -1,3 +1,5 @@
+import styles from './checkbox.module.scss'
+
 type CheckBoxProps = {
   name: string
   value: string
@@ -16,7 +18,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
   children,
 }) => {
   return (
-    <label>
+    <label className={styles.label}>
       <input
         type="checkbox"
         name={name}

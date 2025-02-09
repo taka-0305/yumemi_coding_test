@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import stlyes from './App.module.scss'
 import fetchData from './api/api'
-import CheckBox from './components/checkbox/checkbox'
+import CheckBox from './components/ui/checkbox/checkbox'
 import PrefectureForm from './components/prefectureForm/prefecture-form'
 import PopulationChart from './components/populationChart/population-chart'
 

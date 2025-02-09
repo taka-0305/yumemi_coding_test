@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import CheckBox from '../checkbox/checkbox'
+import CheckBox from '../ui/checkbox/checkbox'
 import fetchData from '../../api/api'
+import styles from './prefecture-form.module.scss'
 
 type Prefecture = {
   prefCode: number
@@ -36,19 +37,23 @@ const PrefectureForm: React.FC<PrefectureFormProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>都道府県リスト</h2>
-      {prefectures.map((row) => (
-        <CheckBox
-          key={row.prefCode}
-          name="prefecture"
-          value={String(row.prefCode)}
-          checked={selectedPrefs.some((p) => p.prefCode === row.prefCode)}
-          onChange={() => handleChange(row.prefCode, row.prefName)}
-        >
-          {row.prefName}
-        </CheckBox>
-      ))}
-      <br />
+      <div className={styles.title}>
+        <h2>都道府県リスト</h2>
+      </div>
+      <div className={styles.checkbox_wrapper}>
+        {prefectures.map((row) => (
+          <CheckBox
+            key={row.prefCode}
+            name="prefecture"
+            value={String(row.prefCode)}
+            checked={selectedPrefs.some((p) => p.prefCode === row.prefCode)}
+            onChange={() => handleChange(row.prefCode, row.prefName)}
+          >
+            {row.prefName}
+          </CheckBox>
+        ))}
+        <br />
+      </div>
       <button type="submit">送信</button>
     </form>
   )
