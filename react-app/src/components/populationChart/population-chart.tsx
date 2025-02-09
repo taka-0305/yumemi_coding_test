@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import * as Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import fetchData from '../../api/api'
+import styles from './population-chart.module.scss'
 
 type PopulationData = {
   year: number
@@ -29,7 +30,7 @@ const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefs }) => {
         data.result.data.find((d: any) => d.label === '総人口')?.data || []
 
       return {
-        name: `都道府県 ${pref.prefName}`,
+        name: `${pref.prefName}`,
         data: populationData.map((d: PopulationData) => [d.year, d.value]),
       }
     }
@@ -52,7 +53,7 @@ const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefs }) => {
   }
 
   return (
-    <div>
+    <div className={styles.graph_wrapper}>
       <h2>人口推移</h2>
       {seriesData.length > 0 ? (
         <HighchartsReact highcharts={Highcharts} options={chartOptions} />
