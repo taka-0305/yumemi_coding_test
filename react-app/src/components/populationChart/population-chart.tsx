@@ -57,7 +57,7 @@ const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefs }) => {
       {seriesData.length > 0 ? (
         <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       ) : (
-        <p>都道府県を選択して送信してください。</p>
+        <p>上のボタンから都道府県を選択して送信してください。</p>
       )}
     </div>
   )

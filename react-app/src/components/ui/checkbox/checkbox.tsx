@@ -18,7 +18,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
   children,
 }) => {
   return (
-    <label className={styles.label}>
+    <div className={styles.checkbox_wrapper}>
       <input
         type="checkbox"
         name={name}
@@ -27,8 +27,11 @@ const CheckBox: React.FC<CheckBoxProps> = ({
         required={required}
         onChange={onChange}
       />
-      {children}
-    </label>
+      <div className={styles.label}>
+        <div className={styles.custom}></div>
+        <p>{children}</p>
+      </div>
+    </div>
   )
 }
 
