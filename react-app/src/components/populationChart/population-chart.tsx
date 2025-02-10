@@ -4,6 +4,7 @@ import HighchartsReact from 'highcharts-react-official'
 import fetchData from '../../api/api'
 import styles from './population-chart.module.scss'
 import ChartRadioButtonList from '../ChartRadioButtonList/chart-radiobutton-list'
+import { FC } from 'react'
 
 type PopulationData = {
   year: number
@@ -19,7 +20,7 @@ type PopulationChartProps = {
   selectedPrefs: Prefecture[]
 }
 
-const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefs }) => {
+const PopulationChart: FC<PopulationChartProps> = ({ selectedPrefs }) => {
   const [seriesData, setSeriesData] = useState<any[]>([])
   const [selectedLabel, setSelectedLabel] = useState('総人口')
 
@@ -103,6 +104,7 @@ const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefs }) => {
       },
     },
     series: seriesData,
+    accessibility: { enabled: false },
   }
 
   return (

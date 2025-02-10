@@ -1,15 +1,15 @@
 // components/ui/radiobox/RadioBox.tsx
 import styles from './radiobox.module.scss'
-
+import { ReactNode, FC, ChangeEvent } from 'react'
 type RadioBoxProps = {
   name: string
   value: string
   checked: boolean
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  children: React.ReactNode
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  children: ReactNode
 }
 
-const RadioBox: React.FC<RadioBoxProps> = ({
+const RadioBox: FC<RadioBoxProps> = ({
   name,
   value,
   checked,
@@ -17,8 +17,9 @@ const RadioBox: React.FC<RadioBoxProps> = ({
   children,
 }) => {
   return (
-    <label className={styles.radio}>
+    <label className={styles.radio} htmlFor={`radio-${name}-${children}`}>
       <input
+        id={`radio-${name}-${children}`}
         type="radio"
         name={name}
         value={value}

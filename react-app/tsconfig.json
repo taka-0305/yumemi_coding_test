@@ -1,7 +1,16 @@
 {
-  "files": [],
+  "files": ["src/global.d.ts"],
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "module": "ES2020",
+    "moduleResolution": "Node",
+    "target": "ES2020",
+    "jsx": "react-jsx",
+    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "esModuleInterop": true
+  },
+  "include": ["src"]
 }
