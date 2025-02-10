@@ -3,6 +3,7 @@ import * as Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import fetchData from '../../api/api'
 import styles from './population-chart.module.scss'
+import ChartRadioButtonList from '../ChartRadioButtonList/chart-radiobutton-list'
 
 type PopulationData = {
   year: number
@@ -20,6 +21,7 @@ type PopulationChartProps = {
 
 const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefs }) => {
   const [seriesData, setSeriesData] = useState<any[]>([])
+  const [selectedLabel, setSelectedLabel] = useState('総人口')
 
   useEffect(() => {
     const fetchPopulationData = async (pref: Prefecture) => {
@@ -27,7 +29,7 @@ const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefs }) => {
         `api/v1/population/composition/perYear?prefCode=${pref.prefCode}`
       )
       const populationData =
-        data.result.data.find((d: any) => d.label === '総人口')?.data || []
+        data.result.data.find((d: any) => d.label === selectedLabel)?.data || []
 
       return {
         name: `${pref.prefName}`,
@@ -43,10 +45,10 @@ const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefs }) => {
     }
 
     loadPopulationData()
-  }, [selectedPrefs])
+  }, [selectedPrefs, selectedLabel])
 
   const chartOptions = {
-    title: { text: '人口推移' },
+    title: { text: selectedLabel + '推移' },
     xAxis: { title: { text: '年' }, type: 'category' },
     yAxis: { title: { text: '人口数' } },
     series: seriesData,
@@ -54,7 +56,17 @@ const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefs }) => {
 
   return (
     <div className={styles.graph_wrapper}>
-      <h2>人口推移</h2>
+      <div className={styles.info_wrapper}>
+        <h2>人口推移</h2>
+        {seriesData.length > 0 ? (
+          <ChartRadioButtonList
+            selectedLabel={selectedLabel}
+            setSelectedLabel={setSelectedLabel}
+          />
+        ) : (
+          ''
+        )}
+      </div>
       {seriesData.length > 0 ? (
         <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       ) : (
