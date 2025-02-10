@@ -5,6 +5,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
+    "composite": true,
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -20,7 +21,9 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "typeRoots": ["./node_modules/@types", "./node_modules/@testing-library"],
+    "types": ["jest-dom"]
   },
   "include": ["src"]
 }

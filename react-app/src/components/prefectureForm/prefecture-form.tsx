@@ -3,6 +3,7 @@ import CheckBox from '../ui/checkbox/checkbox'
 import Button from '../ui/button/button'
 import fetchData from '../../api/api'
 import styles from './prefecture-form.module.scss'
+import { FC, FormEvent } from 'react'
 
 type Prefecture = {
   prefCode: number
@@ -13,7 +14,7 @@ type PrefectureFormProps = {
   onSubmit: (selectedPrefs: Prefecture[]) => void
 }
 
-const PrefectureForm: React.FC<PrefectureFormProps> = ({ onSubmit }) => {
+const PrefectureForm: FC<PrefectureFormProps> = ({ onSubmit }) => {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([])
   const [selectedPrefs, setSelectedPrefs] = useState<Prefecture[]>([])
 
@@ -31,7 +32,7 @@ const PrefectureForm: React.FC<PrefectureFormProps> = ({ onSubmit }) => {
     )
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault() // ページのリロードを防ぐ
     onSubmit(selectedPrefs) // 選択された都道府県を親コンポーネントに渡す
   }

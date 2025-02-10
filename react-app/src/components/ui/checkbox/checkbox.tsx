@@ -1,15 +1,16 @@
 import styles from './checkbox.module.scss'
+import { ReactNode, FC, ChangeEvent } from 'react'
 
 type CheckBoxProps = {
   name: string
   value: string
   checked?: boolean
   required?: boolean
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  children: React.ReactNode
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+  children: ReactNode
 }
 
-const CheckBox: React.FC<CheckBoxProps> = ({
+const CheckBox: FC<CheckBoxProps> = ({
   name,
   value,
   checked = false,
@@ -18,20 +19,20 @@ const CheckBox: React.FC<CheckBoxProps> = ({
   children,
 }) => {
   return (
-    <div className={styles.checkbox_wrapper}>
+    <label className={styles.checkbox_wrapper}>
       <input
         type="checkbox"
         name={name}
         value={value}
         checked={checked}
         required={required}
-        onChange={onChange}
+        onChange={onChange || (() => {})}
       />
       <div className={styles.label}>
         <div className={styles.custom}></div>
         <p>{children}</p>
       </div>
-    </div>
+    </label>
   )
 }
 

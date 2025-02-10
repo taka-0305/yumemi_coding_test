@@ -1,12 +1,14 @@
 import styles from './button.module.scss'
+import { ReactNode, FC } from 'react'
 
 type ButtonProps = {
-  children: React.ReactNode
+  children: ReactNode
+  onClick?: () => void
 }
 
-const Button: React.FC<ButtonProps> = ({ children }) => {
+const Button: FC<ButtonProps> = ({ children, onClick }) => {
   return (
-    <button className={styles.button} type="submit">
+    <button className={styles.button} type="submit" onClick={onClick}>
       <span className={styles.shadow}></span>
       <span className={styles.edge}></span>
       <span className={`${styles.front} ${styles.text}`}>{children}</span>

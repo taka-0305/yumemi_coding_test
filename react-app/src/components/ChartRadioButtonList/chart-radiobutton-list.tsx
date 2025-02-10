@@ -1,13 +1,13 @@
-import { useState } from 'react'
 import styles from './chart-radiobutton-list.module.scss'
 import RadioBox from '../ui/radiobox/radiobox'
+import { FC } from 'react'
 
 type ChartRadioButtonProps = {
   selectedLabel: string
   setSelectedLabel: (label: string) => void
 }
 
-const ChartRadioButtonList: React.FC<ChartRadioButtonProps> = ({
+const ChartRadioButtonList: FC<ChartRadioButtonProps> = ({
   selectedLabel,
   setSelectedLabel,
 }) => {

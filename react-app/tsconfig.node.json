@@ -4,6 +4,7 @@
     "target": "ES2022",
     "lib": ["ES2023"],
     "module": "ESNext",
+    "composite": true,
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -12,13 +13,14 @@
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "typeRoots": ["./node_modules/@types", "./node_modules/@testing-library"],
+    "types": ["jest-dom"]
   },
   "include": ["vite.config.ts"]
 }
