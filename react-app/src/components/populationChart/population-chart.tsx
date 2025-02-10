@@ -48,9 +48,60 @@ const PopulationChart: React.FC<PopulationChartProps> = ({ selectedPrefs }) => {
   }, [selectedPrefs, selectedLabel])
 
   const chartOptions = {
-    title: { text: selectedLabel + '推移' },
-    xAxis: { title: { text: '年' }, type: 'category' },
-    yAxis: { title: { text: '人口数' } },
+    title: {
+      text: selectedLabel + '推移',
+      style: {
+        fontSize: '2rem',
+        fontWeight: 'bold',
+      },
+    },
+    xAxis: {
+      title: {
+        text: '年',
+        style: {
+          fontSize: '1.6rem',
+        },
+      },
+      labels: {
+        style: {
+          fontSize: '1.4rem',
+        },
+      },
+      type: 'category',
+    },
+    yAxis: {
+      title: {
+        text: '人口数',
+        style: {
+          fontSize: '1.6rem',
+        },
+      },
+      labels: {
+        style: {
+          fontSize: '1.4rem',
+        },
+      },
+    },
+    legend: {
+      itemStyle: {
+        fontSize: '1.4rem',
+      },
+    },
+    tooltip: {
+      style: {
+        fontSize: '1.4rem',
+      },
+    },
+    plotOptions: {
+      series: {
+        dataLabels: {
+          enabled: true,
+          style: {
+            fontSize: '1.4rem',
+          },
+        },
+      },
+    },
     series: seriesData,
   }
 
