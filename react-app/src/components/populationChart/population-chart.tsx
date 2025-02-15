@@ -105,6 +105,41 @@ const PopulationChart: FC<PopulationChartProps> = ({ selectedPrefs }) => {
     },
     series: seriesData,
     accessibility: { enabled: false },
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 768, // 画面幅が 768px 以下の時に適用
+          },
+          chartOptions: {
+            title: {
+              style: { fontSize: '1.5rem' },
+            },
+            xAxis: {
+              title: { style: { fontSize: '1rem' } },
+              labels: { style: { fontSize: '1rem' } },
+            },
+            yAxis: {
+              title: { style: { fontSize: '1rem' } },
+              labels: { style: { fontSize: '1rem' } },
+            },
+            legend: {
+              itemStyle: { fontSize: '1rem' },
+            },
+            tooltip: {
+              style: { fontSize: '1rem' },
+            },
+            plotOptions: {
+              series: {
+                dataLabels: {
+                  style: { fontSize: '1rem' },
+                },
+              },
+            },
+          },
+        },
+      ],
+    },
   }
 
   return (
@@ -117,13 +152,13 @@ const PopulationChart: FC<PopulationChartProps> = ({ selectedPrefs }) => {
             setSelectedLabel={setSelectedLabel}
           />
         ) : (
-          ''
+          <p>上のボタンから都道府県を選択して送信してください。</p>
         )}
       </div>
       {seriesData.length > 0 ? (
         <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       ) : (
-        <p>上のボタンから都道府県を選択して送信してください。</p>
+        ''
       )}
     </div>
   )
