@@ -1,15 +1,9 @@
-import { useEffect, useState } from 'react'
+import { FC, useState } from 'react'
 import * as Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import { fetchPopulationDataAPI } from '../../api/population'
 import styles from './PopulationChart.module.scss'
 import ChartRadioButtonList from '../ChartRadioButtonList/ChartRadioButtonList'
-import { FC } from 'react'
-
-type PopulationData = {
-  year: number
-  value: number
-}
+import { usePopulationData } from '../../hooks/usePopulationData'
 
 type Prefecture = {
   prefCode: number
@@ -21,30 +15,11 @@ type PopulationChartProps = {
 }
 
 const PopulationChart: FC<PopulationChartProps> = ({ selectedPrefs }) => {
-  const [seriesData, setSeriesData] = useState<any[]>([])
   const [selectedLabel, setSelectedLabel] = useState('総人口')
-
-  useEffect(() => {
-    const fetchPopulationData = async (pref: Prefecture) => {
-      const data = await fetchPopulationDataAPI(pref.prefCode)
-      const populationData =
-        data.result.data.find((d: any) => d.label === selectedLabel)?.data || []
-
-      return {
-        name: `${pref.prefName}`,
-        data: populationData.map((d: PopulationData) => [d.year, d.value]),
-      }
-    }
-
-    const loadPopulationData = async () => {
-      const responses = await Promise.all(
-        selectedPrefs.map((pref) => fetchPopulationData(pref))
-      )
-      setSeriesData(responses.filter((data) => data !== null))
-    }
-
-    loadPopulationData()
-  }, [selectedPrefs, selectedLabel])
+  const { seriesData, loading, error } = usePopulationData(
+    selectedPrefs,
+    selectedLabel
+  )
 
   const chartOptions = {
     title: {
@@ -157,6 +132,8 @@ const PopulationChart: FC<PopulationChartProps> = ({ selectedPrefs }) => {
       {seriesData.length > 0 && (
         <HighchartsReact highcharts={Highcharts} options={chartOptions} />
       )}
+      {loading && <p>データを取得中...</p>}
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   )
 }
