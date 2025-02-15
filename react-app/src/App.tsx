@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import stlyes from './App.module.scss'
-import PrefectureForm from './components/prefectureForm/prefecture-form'
-import PopulationChart from './components/populationChart/population-chart'
+import PrefectureForm from './components/PrefectureForm/PrefectureForm'
+import PopulationChart from './components/PopulationChart/PopulationChart'
 
 type Prefecture = {
   prefCode: number

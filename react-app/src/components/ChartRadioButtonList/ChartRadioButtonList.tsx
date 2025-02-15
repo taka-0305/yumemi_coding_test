@@ -1,4 +1,4 @@
-import styles from './chart-radiobutton-list.module.scss'
+import styles from './ChartRadioButtonList.module.scss'
 import RadioBox from '../ui/radiobox/radiobox'
 import { FC } from 'react'
 

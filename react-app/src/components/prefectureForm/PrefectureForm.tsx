@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import CheckBox from '../ui/checkbox/checkbox'
 import Button from '../ui/button/button'
 import { fetchPrefecturesDataAPI } from '../../api/prefectures'
-import styles from './prefecture-form.module.scss'
+import styles from './PrefectureForm.module.scss'
 import { FC, FormEvent } from 'react'
 
 type Prefecture = {

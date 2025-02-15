@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
-import PopulationChart from '../population-chart'
+import PopulationChart from '../PopulationChart'
 import fetchData from '../../../api/fetchClient'
 
 jest.mock('../../../api/api', () => ({
