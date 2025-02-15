@@ -142,21 +142,20 @@ const PopulationChart: FC<PopulationChartProps> = ({ selectedPrefs }) => {
 
   return (
     <div className={styles.graph_wrapper}>
-      <div className={styles.info_wrapper}>
+      <div className={styles.title}>
         <h2>人口推移</h2>
-        {seriesData.length > 0 ? (
-          <ChartRadioButtonList
-            selectedLabel={selectedLabel}
-            setSelectedLabel={setSelectedLabel}
-          />
-        ) : (
+        {seriesData.length === 0 && (
           <p>上のボタンから都道府県を選択して送信してください。</p>
         )}
       </div>
-      {seriesData.length > 0 ? (
+      {seriesData.length > 0 && (
+        <ChartRadioButtonList
+          selectedLabel={selectedLabel}
+          setSelectedLabel={setSelectedLabel}
+        />
+      )}
+      {seriesData.length > 0 && (
         <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      ) : (
-        ''
       )}
     </div>
   )
