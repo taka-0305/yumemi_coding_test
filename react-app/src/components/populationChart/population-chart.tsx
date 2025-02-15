@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import * as Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
-import fetchData from '../../api/api'
+import { fetchPopulationDataAPI } from '../../api/population'
 import styles from './population-chart.module.scss'
 import ChartRadioButtonList from '../ChartRadioButtonList/chart-radiobutton-list'
 import { FC } from 'react'
@@ -26,9 +26,7 @@ const PopulationChart: FC<PopulationChartProps> = ({ selectedPrefs }) => {
 
   useEffect(() => {
     const fetchPopulationData = async (pref: Prefecture) => {
-      const data = await fetchData(
-        `api/v1/population/composition/perYear?prefCode=${pref.prefCode}`
-      )
+      const data = await fetchPopulationDataAPI(pref.prefCode)
       const populationData =
         data.result.data.find((d: any) => d.label === selectedLabel)?.data || []
 

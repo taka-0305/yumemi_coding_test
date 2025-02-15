@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import CheckBox from '../ui/checkbox/checkbox'
 import Button from '../ui/button/button'
-import fetchData from '../../api/api'
+import { fetchPrefecturesDataAPI } from '../../api/prefectures'
 import styles from './prefecture-form.module.scss'
 import { FC, FormEvent } from 'react'
 
@@ -19,9 +19,11 @@ const PrefectureForm: FC<PrefectureFormProps> = ({ onSubmit }) => {
   const [selectedPrefs, setSelectedPrefs] = useState<Prefecture[]>([])
 
   useEffect(() => {
-    fetchData('api/v1/prefectures')
-      .then((data) => setPrefectures(data.result))
-      .catch((err) => console.error(err))
+    const loadPrefecturesData = async () => {
+      const data = await fetchPrefecturesDataAPI()
+      setPrefectures(data)
+    }
+    loadPrefecturesData()
   }, [])
 
   const handleChange = (prefCode: number, prefName: string) => {
