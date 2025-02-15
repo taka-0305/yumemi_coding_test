@@ -13,6 +13,7 @@ function App() {
 
   return (
     <div className={stlyes.wrapper}>
+      <h1>都道府県別の総人口推移グラフ</h1>
       <PrefectureForm onSubmit={setSelectedPrefs} />
       <PopulationChart selectedPrefs={selectedPrefs} />
     </div>
