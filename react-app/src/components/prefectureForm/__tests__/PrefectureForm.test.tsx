@@ -1,18 +1,20 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import PrefectureForm from '../PrefectureForm'
-import fetchData from '../../../api/fetchClient'
-
-jest.mock('../../../api/api')
+import { fetchPrefecturesDataAPI } from '../../../api/prefectures'
+jest.mock('../../../api/prefectures', () => ({
+  __esModule: true,
+  fetchPrefecturesDataAPI: jest.fn(),
+}))
 
 describe('PrefectureForm Component', () => {
   const mockPrefectures = [
     { prefCode: 1, prefName: '北海道' },
     { prefCode: 13, prefName: '東京都' },
   ]
-  const mockedFetchData = fetchData as jest.Mock
 
   beforeEach(() => {
-    mockedFetchData.mockResolvedValue({ result: mockPrefectures })
+    jest.clearAllMocks()
+    ;(fetchPrefecturesDataAPI as jest.Mock).mockResolvedValue(mockPrefectures)
   })
 
   it('renders the form correctly', async () => {
