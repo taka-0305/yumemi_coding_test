@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import * as Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import { fetchPopulationDataAPI } from '../../api/population'
-import styles from './population-chart.module.scss'
-import ChartRadioButtonList from '../ChartRadioButtonList/chart-radiobutton-list'
+import styles from './PopulationChart.module.scss'
+import ChartRadioButtonList from '../ChartRadioButtonList/ChartRadioButtonList'
 import { FC } from 'react'
 
 type PopulationData = {

@@ -1,5 +1,5 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import ChartRadioButtonList from '../chart-radiobutton-list'
+import ChartRadioButtonList from '../ChartRadioButtonList'
 
 describe('ChartRadioButtonList Component', () => {
   test('renders all radio buttons', () => {
