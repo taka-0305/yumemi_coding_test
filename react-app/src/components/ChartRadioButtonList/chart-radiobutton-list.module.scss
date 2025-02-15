@@ -1,3 +1,5 @@
+@import "../../styles/media";
+
 .radio_inputs {
   position: relative;
   display: flex;
@@ -9,4 +11,7 @@
   padding: 0.25rem;
   width: 300px;
   font-size: 14px;
+  @include mobile{
+    width: 100%;
+  }
 }
