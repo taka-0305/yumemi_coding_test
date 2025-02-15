@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import PrefectureForm from '../prefecture-form'
-import fetchData from '../../../api/api'
+import fetchData from '../../../api/fetchClient'
 
 jest.mock('../../../api/api')
 
