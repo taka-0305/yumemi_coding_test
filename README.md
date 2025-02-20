@@ -26,3 +26,7 @@ componentを配置
 各コンポーネントのロジック部分を配置
 ### styles 
 cssファイルを配置
+
+## コミットメッセージ
+こちらの記事を参考にメッセージを記述  
+https://qiita.com/konatsu_p/items/dfe199ebe3a7d2010b3e
